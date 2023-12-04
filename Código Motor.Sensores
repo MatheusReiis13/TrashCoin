@@ -1,0 +1,30 @@
+// Define os pinos para os sensores e motores
+const int sensorIndutivoPin = 2;
+const int sensorCapacitivoPin = 3;
+const int motorDireitaPin = 9;
+const int motorEsquerdaPin = 10;
+
+void setup() {
+  // Configura os pinos como entrada ou saída
+  pinMode(sensorIndutivoPin, INPUT);
+  pinMode(sensorCapacitivoPin, INPUT);
+  pinMode(motorDireitaPin, OUTPUT);
+  pinMode(motorEsquerdaPin, OUTPUT);
+}
+
+void loop() {
+  // Verifica o sensor indutivo
+  if (digitalRead(sensorIndutivoPin) == HIGH) {
+    // Ativa o motor para a direita
+    digitalWrite(motorDireitaPin, HIGH);
+    digitalWrite(motorEsquerdaPin, LOW);
+  } else if (digitalRead(sensorCapacitivoPin) == HIGH) {
+    // Ativa o motor para a esquerda
+    digitalWrite(motorDireitaPin, LOW);
+    digitalWrite(motorEsquerdaPin, HIGH);
+  } else {
+    // Desliga ambos os motores se nenhum sensor for acionado
+    digitalWrite(motorDireitaPin, LOW);
+    digitalWrite(motorEsquerdaPin, LOW);
+  }
+}
