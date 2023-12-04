@@ -1,0 +1,31 @@
+const int pinCelulaCarga = A0;  // Conecte a célula de carga ao pino analógico A0
+const float capacidadeCarga = 5000.0;  // Capacidade da célula de carga em gramas (5 kg)
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Leitura da tensão da célula de carga
+  int valorLeitura = analogRead(pinCelulaCarga);
+
+  // Converte a leitura para a unidade de peso (gramas, por exemplo)
+  float pesoGramas = converterParaPeso(valorLeitura);
+
+  // Exibe o peso no monitor serial
+  Serial.print("Peso: ");
+  Serial.print(pesoGramas);
+  Serial.println(" gramas");
+
+  delay(1000);  // Aguarda 1 segundo antes da próxima leitura
+}
+
+float converterParaPeso(int leitura) {
+  // Aqui você precisará calibrar a sua célula de carga para obter uma fórmula adequada
+  // para converter a leitura analógica em unidades de peso (gramas, quilos, etc.)
+  // Por exemplo, você pode usar uma fórmula linear: peso = (capacidadeCarga / 1023) * leitura
+
+  float peso = (capacidadeCarga / 1023.0) * leitura;
+
+  return peso;
+}
